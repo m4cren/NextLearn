@@ -1,6 +1,11 @@
+
+
+import getUserAuth from "@/lib/getAuthUser";
 import NavLinks from "./NavLinks";
 
-const NavBar = () => {
+const NavBar = async () => {
+    const userAuth = await getUserAuth()
+    console.log(userAuth)
     return (
         <nav className="sticky top-0 flex flex-row items-center justify-between py-12 px-16 bg-[#2c2c2c90] border-2 border-white/20 m-6 rounded-[4rem] backdrop-blur-2xl">
             <h1 className="text-[2.3rem] font-bold text-[#f5f5f5]">
@@ -10,11 +15,11 @@ const NavBar = () => {
                 <NavLinks label="Home" href="/" />
                 <NavLinks label="About" href="/about" />
                 <NavLinks label="Insights" href="/insights" />
-                <NavLinks
+                {!userAuth && <NavLinks
                     label="Sign Up Now"
                     href="/sign-up"
                     style="bg-[#2c2c2c] px-4 py-2 rounded-full"
-                />
+                />}
             </ul>
         </nav>
     );
